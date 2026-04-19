@@ -1,0 +1,96 @@
+<mxfile host="app.diagrams.net" modified="2026-03-26T00:00:00.000Z" agent="Cursor" version="20.8.16">
+  <diagram id="project-overview" name="Project Overview">
+    <mxGraphModel dx="1200" dy="600" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="none">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- Nodes -->
+        <mxCell id="2" value="User / Browser&#10;loads Streamlit page" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="40" y="120" width="170" height="60" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="3" value="Streamlit App&#10;(`app.py` / `run()`)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="240" y="80" width="240" height="110" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="4" value="Default ranking&#10;`get_top_rsi_symbols()`&#10;(`st.cache_data`)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="520" y="60" width="260" height="85" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="5" value="Data Access Layer&#10;(`data.py`)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="520" y="165" width="260" height="105" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="6" value="Local Cache&#10;SQLite (`market_data.db`)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="820" y="150" width="210" height="70" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="7" value="External Price Source&#10;`yfinance` download" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="820" y="235" width="210" height="70" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="8" value="Indicator Logic&#10;`calculate_rsi()`" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eaf2f8;strokeColor=#5499c7;" vertex="1" parent="1">
+          <mxGeometry x="520" y="295" width="260" height="70" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="9" value="Chart/UI Rendering&#10;(`dashboard.py` + Plotly)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="820" y="295" width="260" height="90" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="10" value="Automated Tests&#10;(`tests/` + `pytest`)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f2f2f2;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="240" y="315" width="240" height="70" as="geometry"/>
+        </mxCell>
+
+        <!-- Edges -->
+        <mxCell id="11" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;startArrow=none;" parent="1" source="2" target="3" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="12" value="compute defaults" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;startArrow=none;" parent="1" source="3" target="4" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="13" value="fetch OHLCV" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;startArrow=none;" parent="1" source="3" target="5" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="14" value="rank by latest RSI" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;startArrow=none;" parent="1" source="4" target="5" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="15" value="cache write/read fallback" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;startArrow=none;" parent="1" source="5" target="6" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="16" value="download when cache miss" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;startArrow=none;" parent="1" source="5" target="7" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="17" value="return price history" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;startArrow=none;" parent="1" source="5" target="8" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="18" value="RSI trend series" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;startArrow=none;" parent="1" source="8" target="9" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="19" value="render RSI charts per symbol" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;startArrow=none;" parent="1" source="3" target="9" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="20" value="unit tests cover modules" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;startArrow=none;" parent="1" source="10" target="5" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="21" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;startArrow=none;" parent="1" source="10" target="8" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="22" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;startArrow=none;" parent="1" source="10" target="9" edge="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+      </root>
+      </mxGraphModel>
+  </diagram>
+</mxfile>
+
