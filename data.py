@@ -426,7 +426,6 @@ def fetch_price_data(
     database_url: str | None = None,
 ) -> pd.DataFrame:
     """Fetch OHLCV data, persist to Postgres, fallback to cached prices in Postgres."""
-    init_db(database_url=database_url)
     try:
         data = yf.download(symbol, period=period, interval=interval, progress=False)
     except Exception:

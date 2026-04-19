@@ -329,12 +329,21 @@ def run() -> None:
         st.warning(f"Could not fetch full S&P 500 symbol list: {exc}")
         all_symbols = ["AAPL", "MSFT", "NVDA", "AMZN", "GOOGL", "META", "TSLA", "JPM", "V", "XOM"]
 
-    default_symbols = get_top_rsi_symbols(all_symbols, top_n=10)
+    # Fast defaults: avoid scanning the entire S&P500 on app start.
+    default_symbols = ["AAPL", "MSFT", "NVDA", "AMZN", "GOOGL", "META", "TSLA", "JPM", "V", "XOM"]
+    with st.sidebar:
+        slow_defaults = st.toggle(
+            "Use Top-RSI defaults (slow)",
+            value=False,
+            help="Scans many symbols to find highest RSI. This can take a long time.",
+        )
+    if slow_defaults:
+        default_symbols = get_top_rsi_symbols(all_symbols, top_n=10)
     symbols = st.multiselect(
         "Select symbols",
         options=all_symbols,
         default=default_symbols,
-        help="Defaults to the top 10 highest latest RSI symbols across S&P 500.",
+        help="Defaults to a fast preselected list (enable Top-RSI defaults in the sidebar if needed).",
     )
 
     is_default_selection = (
