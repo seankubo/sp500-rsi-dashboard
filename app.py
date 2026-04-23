@@ -307,8 +307,6 @@ def run() -> None:
     username: str | None = None
     purchase_enabled = False
     init_db(database_url=database_url)
-    # Seed requested demo credentials (only if missing/unset).
-    ensure_user_password("demo_user", "demo", database_url=database_url, overwrite=False)
 
     with st.sidebar:
         st.subheader("Login")
